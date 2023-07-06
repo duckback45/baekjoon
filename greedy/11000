@@ -1,0 +1,6 @@
+#강의실 배정
+n = int(input())
+time = [[*map(int,input().split())] for _ in range(n)]
+time.sort()
+
+print(time)

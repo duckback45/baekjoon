@@ -1,0 +1,41 @@
+
+n = int(input())
+word = list(input() for _ in range(n))
+result = []
+for w in word:
+    stack = []
+    for i in list(w):
+        if len(stack) != 0 and stack[-1] + i == '()':
+            stack.pop()
+        else:
+            stack.append(i)
+
+    if len(stack) == 0:
+        result.append("YES")
+    else:
+        result.append("NO")
+
+print(*result)
+
+
+'''
+다른 사람 코드 효율이 더 좋다
+for _ in range(int(input())):
+    stk = []
+    isVPS = True
+    for ch in input():
+        if ch == "(":
+            stk.append(ch)
+        else:
+            if stk:
+                stk.pop()
+            else:
+                isVPS = False
+                break
+
+    if stk:
+        isVPS = False
+    
+    print('YES' if isVPS else 'NO')
+     
+'''
