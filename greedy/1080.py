@@ -1,28 +1,20 @@
-n, m = map(int, input().split())
+from sys import stdin
 
-from_matrix = []
-to_matrix = []
-check_count = 0
-for _ in range(n):
-    from_matrix.append([*map(int, input())])
-
-for _ in range(n):
-    to_matrix.append([*map(int, input())])
-
-if n >= 3 and m >= 3:
-    for i in range(n-2):
-        for j in range(m-2):
-            if i > n - 2 or j < n - 2:
-                if ''.join(from_matrix[i][j:j + 2]) != ''.join(to_matrix[i][j:j + 2]):
-                    check_count += 1
+def toggle(r, c):
+    for i in range(r, r + 3):
+        for j in range(c, c + 3):
+            A[i][j] ^= 1
 
 
+N, M = map(int, stdin.readline().split())
+A = [list(map(int, stdin.readline().rstrip())) for _ in range(N)]
+B = [list(map(int, stdin.readline().rstrip())) for _ in range(N)]
 
+cnt = 0
+for i in range(N - 2):
+    for j in range(M - 2):
+        if A[i][j] != B[i][j]:
+            toggle(i, j)
+            cnt += 1
 
-
-            # if check_flag:
-            #     from_matrix[i][j:j + 3]
-            #     from_matrix[i + 1][j:j + 3]
-            #     from_matrix[i + 2][j:j + 3]
-else:
-    print(-1)
+print(cnt if A == B else -1)
