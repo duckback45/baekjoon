@@ -3,14 +3,20 @@ import re
 def get_stt_filter(stt_list):
     try:
         whole_stt = "".join(stt_list)
-        stt_span = re.search("안녕.*동해물과",whole_stt)
-        if stt_span != None:
-            start, end = stt_span.span()
-            return get_stt_start_and_last_index(stt_list, start, end)
-        return [0,0]
+        start, end = re.search("안녕.*동해물과",whole_stt).span()
+        start1, end1 = re.search("백용용.*백두산",whole_stt).span()
+        start2, end2 = re.search("키특키득.*닳도록",whole_stt).span()
+        lists = []
+        lists.append({"start":start,"end": end})
+        lists.append({"start":start1, "end":end1})
+        lists.append({"start":start2, "end":end2})
+        result = []
+        for l in lists:
+            result.append(get_stt_start_and_last_index(stt_list, l["start"], l["end"]))
+
+        print(result)
     except:
         return [0,0]
-
 
 def get_stt_start_and_last_index(stt_list, start, end):
     result = [0,0]
